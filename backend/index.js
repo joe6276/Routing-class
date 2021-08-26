@@ -80,4 +80,24 @@ app.get('/another', function (req, res){
     return res.send('another')
 })
 
+app.delete('/:id', function(req,res){
+    if(!req.params.id){
+        return res.send(todos);
+    } 
+    
+})
+
+app.put('/:id', function(req,res){
+    const items = req.body;
+    const id = parseInt(req.params.id)
+    todos.items = todos.items.map(item=>{
+        if(item.id === id){
+            return items
+        }
+        return item;
+    });
+
+   res.send(todos);
+})
+
 app.listen(port, function (){console.log("application running on port "+ port)})
